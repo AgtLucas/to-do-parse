@@ -23,4 +23,24 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         this.mContext = context;
         this.mTasks = objects;
     }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);
+            convertView = mLayoutInflater.inflate(R.layout.task_row_item, null);
+        }
+
+        Task task = mTasks.get(position);
+
+        TextView descriptionView = (TextView) convertView.findViewById(R.id.task_description);
+        descriptionView.setText(task.getDescription());
+
+        if (task.isCompleted()) {
+            descriptionView.setPaintFlags(descriptionView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            descriptionView.setPaintFlags(descriptionView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+
+        return convertView;
+    }
 }
