@@ -11,15 +11,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 
 public class AlphaSample extends Activity {
 
     private EditText mTaskInput;
     private ListView mListView;
+    private TaskAdapter mAdapter;
 
     public String APP_ID = "APP_ID";
     public String CLIENT_ID = "CLIENT_ID";
@@ -32,6 +36,8 @@ public class AlphaSample extends Activity {
         Parse.initialize(this, APP_ID, CLIENT_ID);
         ParseAnalytics.trackAppOpened(getIntent());
         ParseObject.registerSubclass(Task.class);
+
+        mAdapter = new TaskAdapter(this, new ArrayList<Task>());
 
         mTaskInput = (EditText) findViewById(R.id.task_input);
         mListView = (ListView) findViewById(R.id.task_list);
@@ -63,7 +69,21 @@ public class AlphaSample extends Activity {
             t.setDescription(mTaskInput.getText().toString());
             t.setCompleted(false);
             t.saveEventually();
+            mAdapter.insert(t, 0);
             mTaskInput.setText("");
         }
+    }
+
+    public void updateData() {
+        ParseQuery<Task> query = ParseQuery.getQuery(Task.class);
+        query.findInBackground(new FindCallback<Task>() {
+            @Override
+            public void done(List<Task> tasks, ParseException e) {
+                if (tasks != null) {
+                    mAdapter.clear();
+                    mAdapter.addAll(tasks);
+                }
+            }
+        });
     }
 }
