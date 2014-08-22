@@ -11,7 +11,7 @@ public class TaskRowItem extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_row_item);
+        setContentView(R.layout.task_row_item);
     }
 
 
