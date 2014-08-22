@@ -6,19 +6,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class Alpha extends Activity {
+public class AlphaSample extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alpha);
+        setContentView(R.layout.activity_alpha_sample);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.alpha, menu);
+        getMenuInflater().inflate(R.menu.alpha_sample, menu);
         return true;
     }
 
