@@ -23,6 +23,10 @@
             android:name=".AlphaSample"
             android:label="@string/title_activity_alpha_sample" >
         </activity>
+        <activity
+            android:name=".TaskRowItem"
+            android:label="@string/title_activity_task_row_item" >
+        </activity>
     </application>
 
 </manifest>
